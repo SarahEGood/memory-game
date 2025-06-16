@@ -8,6 +8,7 @@ import selectAllPkmn from './pkmnApi.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <h1>Pokemon Memory Game</h1>
     <App />
   </StrictMode>,
 )
