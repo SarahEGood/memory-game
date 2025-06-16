@@ -1,15 +1,15 @@
 const maxOffset = 1024;
 
 // Should export data currently console-logged via return
-async function selectedPkmn(pkmnid) {
+export async function selectedPkmn(pkmnid) {
     var data = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pkmnid}/`)
        .then((response) => response.json())
        .then((data) => {
         return data;
        })
     var pkmnObj = {
-        id: data.name,
-        name: data.id,
+        id: data.id,
+        name: data.name,
         imgurl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`
     };
     return pkmnObj;
@@ -32,7 +32,8 @@ export async function selectAllPkmn(n=8) {
         const newEntry = await selectedPkmn(randList[i]);
         pkmnList.push(newEntry);
     }
+
     return pkmnList;
 }
 
-export default {selectAllPkmn};
+export default {selectedPkmn, selectAllPkmn};
