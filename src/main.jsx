@@ -4,8 +4,6 @@ import './index.css'
 import App from './App.jsx'
 import selectAllPkmn from './pkmnApi.jsx'
 
-const x = selectAllPkmn();
-
 // Should take data from complete selectedPkmns function and output to HTML including with click events
 
 createRoot(document.getElementById('root')).render(
@@ -13,5 +11,3 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>,
 )
-
-console.log(x);

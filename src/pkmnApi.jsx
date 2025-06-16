@@ -25,14 +25,14 @@ function genUniqueRandNums(n=8) {
 }
 
 // Should invoke the data pull thing 8 times with check to not repeat ids in a given selection (no instance where Pikachu shows up twice)
-export function selectAllPkmn(n=8) {
+export async function selectAllPkmn(n=8) {
     var pkmnList = [];
     const randList = genUniqueRandNums(n);
     for (let i = 0; i < n; i++) {
-        const newEntry = selectedPkmn(randList[i]);
+        const newEntry = await selectedPkmn(randList[i]);
         pkmnList.push(newEntry);
     }
     return pkmnList;
 }
 
-export default selectAllPkmn;
+export default {selectAllPkmn};
