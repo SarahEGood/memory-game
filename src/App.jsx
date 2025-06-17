@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import {selectedPkmn, selectAllPkmn} from './pkmnApi.jsx'
+import {selectAllPkmn} from './pkmnApi'
 
 function App() {
   const [nextId, updateId] = useState(0);
