@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import {selectedPkmn, selectAllPkmn} from './pkmnApi.jsx'
 
-console.log('run func outside');
-console.log(selectAllPkmn());
-
 function App() {
+  let nextId = 0;
+
   const [name, setName] = useState('');
   const [pokemon, setPokemon] = useState([]);
   const [pkmnChoices, setPkmnChoices] = useState([]);
@@ -23,16 +22,16 @@ function App() {
     return pokemon.some(item => item.name === name);
   };
 
-  const handleSelect = (name) => {
+  const handleSelect = async (event, name) => {
     if (checkPokemonExists(name)) {
-      setPokemon();
+      setPokemon([]);
       nextId = 0;
     } else {
-      setPokemon([pokemon,
-        {id: nextId, name: name}
-      ]);
+      pokemon.push({id: nextId, name: name});
       nextId += 1;
     }
+    const response = await selectAllPkmn();
+    setPkmnChoices(response);
   }
 
   return (
@@ -43,7 +42,10 @@ function App() {
                 return (
                 <div key={pkmnItem.id} className='container-item'>
                         <div className='container-image'>
-                            <img src = {pkmnItem.imgurl} alt={pkmnItem.name} />
+                            <img src = {pkmnItem.imgurl}
+                              alt={pkmnItem.name}
+                              onClick={(event) => handleSelect(event, pkmnItem.name)}
+                              />
                         </div>
                         <div className='container-label'>
                           <h2>
