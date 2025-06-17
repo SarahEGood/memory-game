@@ -3,9 +3,7 @@ import './App.css'
 import {selectedPkmn, selectAllPkmn} from './pkmnApi.jsx'
 
 function App() {
-  let nextId = 0;
-
-  const [name, setName] = useState('');
+  const [nextId, updateId] = useState(0);
   const [pokemon, setPokemon] = useState([]);
   const [pkmnChoices, setPkmnChoices] = useState([]);
 
@@ -23,20 +21,21 @@ function App() {
   };
 
   const handleSelect = async (event, name) => {
+    fetchData();
     if (checkPokemonExists(name)) {
       setPokemon([]);
-      nextId = 0;
+      updateId(0);
     } else {
       pokemon.push({id: nextId, name: name});
-      nextId += 1;
+      updateId(nextId+1);
     }
-    const response = await selectAllPkmn();
-    setPkmnChoices(response);
   }
 
   return (
     <>
     <div className='wrapper'>
+      <h1>Pokemon Memory Game</h1>
+      <h2>Score: {nextId}</h2>
       <div id='container'>
         {pkmnChoices.map((pkmnItem) =>{
                 return (
